@@ -11,13 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('complaints', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->string('password');
-            $table->string('telp')->nullable();
-            $table->enum('role', ['admin', 'user'])->default('user');
+            $table->integer('user_id')->unsigned();
+            $table->string('title');
+            $table->text('description');
+            $table->enum('status', ['pending', 'proses', 'selesai']);
+            $table->string('image');
+            $table->foreign('user_id')->on('users')->references('id')->onDelete('cascade');
             $table->rememberToken();
             $table->timestamps();
         });
@@ -28,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('complaints');
     }
 };
