@@ -14,6 +14,8 @@ class DatabaseSeeder extends Seeder
     {
         //:factory(10)->create();
 
-        $this->call(AdminSeeder::class);        
+        $this->call(AdminSeeder::class);   
+        $this->call(UserSeeder::class);   
+
     }
 }
