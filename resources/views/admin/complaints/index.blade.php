@@ -1,4 +1,16 @@
-@extends('layouts.base-front2')
+@extends('layouts.base-app')
+
+@if (Route::currentRouteName()=== 'admin.all.complaints')
+  @section('title', 'Semua Pengaduan')
+@elseif (Route::currentRouteName()=== 'admin.all.pending.complaints')
+  @section('title', 'Semua Pengaduan Pending')
+@elseif (Route::currentRouteName()=== 'admin.all.process.complaints')
+   @section('title', 'Semua Pengaduan Proses')
+@elseif (Route::currentRouteName()=== 'admin.all.success.complaints')
+  @section('title', 'Semua Pengaduan Sukses')
+    
+@endif
+
 
 @section('title', 'Semua Pengaduan')
 
@@ -73,6 +85,7 @@
 @section('content')
 <div class="page-heading">
     <h3>Semua Pengaduan</h3>
+    <p>Semua laporan cepu akan ditampilkan disini.</p>
 </div>
 <section id="multiple-column-form">
     <div class="row match-height">
@@ -80,35 +93,43 @@
             <div class="card shadow-sm">
                 <div class="card-header text-center text-uppercase bg-primary text-white">
                     <h4 class="card-title">Daftar Pengaduan Masyarakat</h4>
+                    
                 </div>
                 <div class="card-content">
                     <div class="card-body">
-                        <table class="table table-striped" id="pengaduan">
+                        <table class="table table-striped" id="myTable">
                             <thead class="table-light">
                                 <tr>
                                     <th>Gambar</th>
                                     <th>Nama Pengadu</th>
                                     <th>Judul Pengaduan</th>
                                     <th>Status</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @forelse ($data as $value)
-                                <tr>
-                                    <td><img src="{{ $value->image }}" alt="{{ $value->title}}"></td>
-                                    <td>{{ $value->guest_name }}</td>
-                                    <td>{{ $value->title}}</td>
-                                    {{-- <td> {!!$value->status_badge!!}</td> --}}
-                                    <td><span class="badge" style="background-color: @if($value->status == 'pending') #ff7976
-                                    @elseif($value->status == 'selesai') #5ddab4
-                                    @else #57caeb
-                                    @endif">{{ strtoupper($value->status) }}</span></td>
-                                </tr>
                                     
+                                <tr>
+                                    <td><img src="/images.adu.png" alt="gambar 1"></td>
+                                    <td>
+                                        {{ $value->name ?? $value->guest_name}}
+                            
+                                    </td>
+                                    <td>
+                                        {{ $value->title}}
+                                    </td>
+                                    <td><span class="badge" style="background-color:
+                                     @if($value->status == 'pending') #ff7976 
+                                     @elseif($value->status == 'selesai')#5ddab
+                                     @else #57caeb 
+                                     @endif">{{ strtoupper($value->status )}} </span></td>
+                                     <td class="text-center">Tanggapi</td>
+                                </tr>
                                 @empty
                                     
                                 @endforelse
-                               
+                                
                             </tbody>
                         </table>
                     </div>
@@ -119,12 +140,4 @@
 </section>
 @endsection
 
-@section('js')
-<script src="{{ asset('mazer/assets/extensions/simple-datatables/umd/simple-datatables.js') }}"></script>
-<script src="{{ asset('mazer/assets/static/js/pages/simple-datatables.js') }}"></script>
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const dataTable = new simpleDatatables.DataTable("#pengaduan");
-    });
-</script>
-@endsection
+

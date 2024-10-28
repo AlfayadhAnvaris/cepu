@@ -4,7 +4,7 @@
             <div class="d-flex justify-content-between align-items-center">
                 <div class="logo">
                     <a href="{{url('/')}}">
-                        <img src="{{ asset('images/adu.jpg') }}" class="img-fluid logo-pengaduan" alt="Logo" srcset="">
+                        <img src="{{ asset('images/adu.png') }}" class="img-fluid logo-pengaduan" alt="Logo" srcset="">
                     </a>
                 </div>
                 <div class="theme-toggle d-flex gap-2  align-items-center mt-2 ms-2">

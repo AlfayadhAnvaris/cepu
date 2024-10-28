@@ -7,34 +7,17 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
 
-// Route::get('/', function () {
-//     //return view('welcome');
-//     //  return view ('front.index');
-//      return view ('front.semua-pengaduan');
-//     //   return view('dashboard.index');
-//     // return view ('front.statistik');
-//     // return view ('front.form-pengaduan');
-// });
 
 Route::get('/', [FrontController::class, 'semuaPengaduan'])->name('guest.allcomplaint');
 Route::get('/complaint-statistics', [FrontController::class, 'semuaStatistik'])->name('guest.alldata');
 Route::get('/complaint-form', [FrontController::class, 'formPengaduan'])->name('guest.formcomplaint');
+Route::post('/complaint-form/store', [FrontController::class, 'storeComplaint'])->name('guest.formcomplaint.store');
 
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
 
 Route::group(['middleware'=>'guest'],  function () {
@@ -55,7 +38,11 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function(): void{
     Route::get('/users/edit/{id}', [UsersController::class, 'edit'])->name('admin.users.edit');
     Route::put('/users/update{id}', [UsersController::class, 'update'])->name('admin.users.update');
     Route::post('/users/destroy/{id}', [UsersController::class, 'destroy'])->name('admin.users.destroy');
-
+    Route::get('/complaint', [AdminController::class, 'allComplaints'])->name('admin.all.complaints');
+    Route::get('/all-pending-complaints', [AdminController::class, 'allPendingComplaints'])->name('admin.all.pending.complaints');
+    Route::get('/all-process-complaints', [AdminController::class, 'allProcessComplaints'])->name('admin.all.process.complaints');
+    Route::get('/all-success-complaints', [AdminController::class, 'allSuccessComplaints'])->name('admin.all.success.complaints');
+    
     });
 
 

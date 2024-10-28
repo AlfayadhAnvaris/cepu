@@ -7,11 +7,26 @@
 </li>
 
 <li
-    class="sidebar-item">
-    <a href="index.html" class='sidebar-link'>
-        <i class="bi bi-grid-fill"></i>
+    class="sidebar-item has-sub {{ request()->routeIs ('admin.all.complaints') || request()->routeIS('admin.all.pending.complaints')  || request()->routeIS('admin.all.process.complaints') || request()->routeIS('admin.all.success.complaints')? 'active' : ''}} ">
+    <a href="" class='sidebar-link'>
+        <i class="bi bi-chat-quote"></i>
         <span>Lihat Pengaduan</span>
     </a>
+
+    <ul class="submenu submenu-closed" style="--submenu-height: 215px;">
+        <li class="submenu-item {{ request()->routeIs ('admin.all.complaints') ? 'active' : ''}}     ">
+            <a href="{{ route('admin.all.complaints')}}" class="submenu-link">Semua Pengaduan</a>
+        </li>
+        <li class="submenu-item">
+            <a href="{{ route('admin.all.pending.complaints')}}" class="submenu-link" class="submenu-link">Pending</a>
+        </li>
+        <li class="submenu-item">
+            <a href="{{ route('admin.all.process.complaints')}}" class="submenu-link" class="submenu-link">Proses</a>
+        </li>
+        <li class="submenu-item">
+            <a href="{{ route('admin.all.success.complaints')}}" class="submenu-link" class="submenu-link">Selesai</a>
+        </li>
+    </ul>
 </li>
 <li
     class="sidebar-item {{ request()->routeIs ('admin.users.index') ? 'active' : ''}} ">
