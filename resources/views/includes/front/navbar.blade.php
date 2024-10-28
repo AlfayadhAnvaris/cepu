@@ -5,9 +5,19 @@
         <div class="container">
             <div class="logo">
                 <a href="{{url('/')}}">
-                    <img src="{{ asset('images/gambar1.jpg') }}" class="img-fluid logo-pengaduan" alt="Logo">
+                    <img src="{{ asset('images/adu.png') }}" class="img-fluid logo-pengaduan" alt="Logo">
                 </a>
             </div>
+            @if (Auth::check())
+            <a href="
+            @if (Auth::user()->role === 'admin')
+            {{route ('admin.index')}}
+            @else
+              #
+            @endif
+            " class="btn btn-primary">Menuju Fitur</a>
+            @endif
+
             <div class="header-top-right">
 
                 @if(Auth::check())

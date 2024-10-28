@@ -124,7 +124,7 @@
                                      @elseif($value->status == 'selesai')#5ddab
                                      @else #57caeb 
                                      @endif">{{ strtoupper($value->status )}} </span></td>
-                                     <td class="text-center">Tanggapi</td>
+                                     <td class="text-center"><a href="{{route('response.complaints', $value->id)}}">Tanggapi</a></td>
                                 </tr>
                                 @empty
                                     

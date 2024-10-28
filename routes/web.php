@@ -28,7 +28,7 @@ Route::post( 'register', [LoginController::class, 'register']);
 });
 
 Route::middleware(['auth'])->group(function(){
-    Route::post('logout', [LoginController::class, 'logout'])->name('logout');
+    Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 });
 
 Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function(): void{
@@ -39,7 +39,9 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function(): void{
     Route::put('/users/update{id}', [UsersController::class, 'update'])->name('admin.users.update');
     Route::post('/users/destroy/{id}', [UsersController::class, 'destroy'])->name('admin.users.destroy');
     Route::get('/complaint', [AdminController::class, 'allComplaints'])->name('admin.all.complaints');
-    Route::get('/all-pending-complaints', [AdminController::class, 'allPendingComplaints'])->name('admin.all.pending.complaints');
+    Route::get('/complaint/{id}response/', [AdminController::class, 'allComplaint'])->name('response.complaints');
+    Route::get('/complaint/{id}response/', [AdminController::class, 'showComplaint'])->name('response.complaints');
+  Route::get('/all-pending-complaints', [AdminController::class, 'allPendingComplaints'])->name('admin.all.pending.complaints');
     Route::get('/all-process-complaints', [AdminController::class, 'allProcessComplaints'])->name('admin.all.process.complaints');
     Route::get('/all-success-complaints', [AdminController::class, 'allSuccessComplaints'])->name('admin.all.success.complaints');
     

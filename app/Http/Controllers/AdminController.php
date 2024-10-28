@@ -54,8 +54,12 @@ class AdminController extends Controller
     ]);
 
 }
+ function showComplaint($id) {
+    $data = Complaint::findOrFail($id);
+    return view('admin.complaints.detail-complaint', [
+    'data' => $data
+     ]);
 
-
-
+   }
 
 }
