@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserComplaintController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
@@ -46,6 +47,22 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function(): void{
     Route::get('/all-success-complaints', [AdminController::class, 'allSuccessComplaints'])->name('admin.all.success.complaints');
     
     });
+
+    Route::prefix('user')->middleware(['auth', 'isUser'])->group(function(){
+
+      Route::get('/', [UserComplaintController::class, 'index'])->name('user.index');
+      Route::get('/complaint-form', [UserComplaintController::class, 'create'])->name('user.form.complaint');
+      Route::post('/complaint-form/store', [UserComplaintController::class, 'store'])->name('user.form.complaint.store');
+      Route::get('/complaints', [UserComplaintController::class, 'allUserComplaints'])->name('user.all.complaints');
+      Route::get('/pending-user-complaints', [UserComplaintController::class, 'allPendingUserComplaints'])->name('user.pending.complaints');
+      Route::get('/process-user-complaints', [UserComplaintController::class, 'allProcessUserComplaints'])->name('user.process.complaints');
+      Route::get('/success-user-complaints', [UserComplaintController::class, 'allSuccessUserComplaints'])->name('user.success.complaints');
+
+      
+    });
+
+
+
 
 
 require __DIR__.'/auth.php';
