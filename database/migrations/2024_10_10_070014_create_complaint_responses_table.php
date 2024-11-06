@@ -15,7 +15,7 @@ return new class extends Migration
             $table->increments('id');
             $table->integer('complaint_id')->unsigned();
             $table->integer('admin_id')->unsigned();
-            $table->foreign('complaint_id')->on('complaints')->references('id')->onDelete('cascade');
+            $table->foreign('complaint_id')->on('complaint')->references('id')->onDelete('cascade');
             $table->integer('user_id')->unsigned();
             $table->text('response');
             $table->string('image');
